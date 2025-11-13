@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8f8f8;
+  color: #222;
+}
+
+.hero {
+  background: linear-gradient(to bottom, #ffcc00, #fff);
+  padding: 60px 20px;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.hero-img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-right: 30px;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-text h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.hero-text button {
+  padding: 10px 20px;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.planos {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.planos h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  max-width: 280px;
+  flex: 1;
+}
+
+.card span {
+  font-size: 40px;
+}
+
+.card h3 {
+  margin-top: 15px;
+  font-size: 22px;
+}
+
+.card p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.card .preco {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.card button {
+  padding: 10px 20px;
+  background-color: #111;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.vantagens {
+  background-color: #111;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.vantagens h2 {
+  font-size: 26px;
+  margin-bottom: 40px;
+}
+
+.vantagens-lista {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.vantagem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 200px;
+}
+
+.vantagem span {
+  font-size: 36px;
+  color: #ffcc00;
+  margin-bottom: 10px;
+}
+
+.vantagem p {
+  font-size: 16px;
+}

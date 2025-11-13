@@ -1,0 +1,645 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boss Fit — Landing (Refinado & Aconchegante)</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent:#d32f2f;
+      --accent-2:#e75b5b;
+      --bg:#fbfbfc;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --soft:#f7f6f8;
+      --nav-height:72px;
+      --btn-radius:12px;
+      --max-width:1200px;
+    }
+
+    /* base */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,Arial;background:var(--bg);color:#071022;-webkit-font-smoothing:antialiased}
+    body{display:flex;flex-direction:column;min-height:100vh} /* keeps footer at bottom */
+    main.site-main{flex:1} /* page content grows and pushes footer down */
+    img{max-width:100%;height:auto;display:block}
+
+    /* reusable container with padding */
+    .container-compact{max-width:var(--max-width);margin:0 auto;padding:0 18px}
+
+    /* ---------------- NAVBAR ---------------- */
+    .navbar-clean{
+      background: #ffffff;
+      color: #071022;
+      transition:box-shadow .28s ease, transform .28s;
+      padding:.6rem 1rem;
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:1300;
+      height: var(--nav-height);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-bottom:1px solid rgba(11,18,32,0.04);
+    }
+    .navbar-container{width:100%;max-width:var(--max-width);display:flex;align-items:center;gap:12px;position:relative;margin:0 auto}
+    .navbar-brand img{height:42px}
+    .nav-link{color:#071022;font-weight:600;padding:.35rem .6rem;border-radius:8px}
+    .nav-link:hover{color:#000}
+    .btn-matric{color:var(--accent);border:2px solid var(--accent);border-radius:var(--btn-radius);padding:.45rem .9rem;font-weight:800;background:transparent}
+    .btn-matric:focus{box-shadow:0 6px 22px rgba(211,47,47,0.08);outline:0}
+    .navbar-toggler{border:0;background:transparent;color:#071022;font-size:22px}
+    .navbar-toggler:focus{outline:0;box-shadow:none}
+
+    /* mobile nav adjustments */
+    @media (max-width:991px){
+      .navbar-brand{display:none}
+      .navbar-container{justify-content:center;padding:0 12px}
+      .navbar-toggler{
+        position:absolute;
+        right:14px;
+        top:50%;
+        transform:translateY(-50%);
+        z-index:1400;
+      }
+      .collapse.navbar-collapse{
+        position:fixed;
+        top:var(--nav-height);
+        left:0;right:0;
+        background:#ffffff;padding:18px;z-index:1400;border-bottom:1px solid rgba(11,18,32,0.04);
+      }
+    }
+
+    /* ---------------- HERO ---------------- */
+    .hero{min-height:62vh;position:relative;overflow:hidden;padding-top:var(--nav-height)}
+    .hero-bg{position:absolute;inset:0;background-image:linear-gradient(0deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02)),url('images/hero-bg.png');background-size:cover;background-position:center;transform:scale(1.03);transition:transform 12s ease}
+    .hero-overlay-image{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:46%;max-width:640px;border-radius:20px;animation:fadeIn .9s ease both}
+    @keyframes fadeIn{from{opacity:0;transform:translate(-50%,-40%)}to{opacity:1;transform:translate(-50%,-50%)}}
+    .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(11,18,32,0.02));pointer-events:none}
+
+    /* make hero overlay scale nicely on small screens */
+    @media (max-width:1200px){ .hero-overlay-image{width:52%} }
+    @media (max-width:991px){ .hero-overlay-image{width:72%;max-width:420px} .hero{min-height:46vh} }
+    @media (max-width:560px){ .hero-overlay-image{width:86%;max-width:360px} .hero{min-height:40vh} }
+
+    /* ---------------- BUTTONS ---------------- */
+    .btn-ghost {
+      display:inline-flex;align-items:center;justify-content:center;gap:.4rem;color:#111827;background:transparent;border:2px solid rgba(11,18,32,0.06);border-radius:var(--btn-radius);padding:.5rem .85rem;font-weight:600;transition:all .16s ease;text-decoration:none;cursor:pointer;
+    }
+    .btn-ghost:hover{background:#f5f5f6;transform:translateY(-2px);box-shadow:0 10px 30px rgba(6,21,34,0.06)}
+
+    /* ---------------- ABOUT ---------------- */
+    .about-section{padding:64px 0;background:transparent}
+    .about-content h2{font-size:1.9rem;margin-bottom:.6rem}
+    .about-content p{color:var(--muted);line-height:1.7}
+    .about-cta{margin-top:18px}
+    .clickable-wrap{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 30px 60px rgba(6,21,34,0.06);border:1px solid rgba(11,18,32,0.04);background:var(--soft)}
+    .clickable-image{display:block;width:100%;height:auto;object-fit:cover;vertical-align:middle}
+    .play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+    .play-circle{width:88px;height:88px;border-radius:50%;background:linear-gradient(180deg,var(--accent),var(--accent-2));display:inline-flex;align-items:center;justify-content:center;box-shadow:0 22px 56px rgba(211,47,47,0.14);border:6px solid rgba(255,255,255,0.08);transition:transform .18s;pointer-events:auto}
+    .play-circle:hover{transform:scale(1.04)}
+    .play-circle i{font-size:30px;color:#fff;margin-left:4px}
+
+    /* ---------------- WHY ---------------- */
+    .why-section{padding:72px 0;background:linear-gradient(180deg,#ffffff,#f7f7f8)}
+    .why-header{max-width:900px;margin:0 auto 28px;text-align:center}
+    .why-title{font-weight:900;font-size:1.7rem;margin-bottom:.35rem;letter-spacing:-0.2px}
+    .why-sub{color:var(--muted);margin-bottom:18px;font-size:1rem;max-width:780px;margin-left:auto;margin-right:auto}
+    .reasons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:18px;max-width:1100px;margin-left:auto;margin-right:auto}
+    .reason-card{background:var(--card);border-radius:14px;padding:20px;border:1px solid rgba(11,18,32,0.04);box-shadow:0 16px 40px rgba(6,21,34,0.06);display:flex;gap:16px;align-items:flex-start;transition:transform .22s,box-shadow .22s}
+    .reason-card:hover{transform:translateY(-8px);box-shadow:0 26px 60px rgba(6,21,34,0.08)}
+    .reason-badge{min-width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.05rem;box-shadow:0 10px 30px rgba(211,47,47,0.12);position:relative}
+    .reason-body h4{margin:0;font-size:1.05rem}
+    .reason-body p{margin:6px 0 0;color:var(--muted);font-size:.98rem;line-height:1.6}
+
+    /* ---------------- SERVICES ---------------- */
+    .services-section{padding:72px 0;background:#fff}
+    .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto}
+    .service-card{background:var(--soft);border-radius:14px;padding:22px;border:1px solid rgba(11,18,32,0.04);box-shadow:0 8px 30px rgba(6,21,34,0.04);transition:transform .2s,box-shadow .2s}
+    .service-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(6,21,34,0.06)}
+    .service-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;margin-bottom:12px}
+
+    /* ---------------- TESTIMONIALS ---------------- */
+    .testimonials{padding:72px 0;background:linear-gradient(180deg,#f9fafb,#ffffff)}
+    .testimonial-card{background:var(--card);border-radius:12px;padding:18px;border:1px solid rgba(11,18,32,0.04);box-shadow:0 12px 36px rgba(6,21,34,0.06);min-height:150px;display:flex;gap:14px;align-items:flex-start}
+    .test-avatar{width:64px;height:64px;border-radius:50%;flex:0 0 64px;overflow:hidden}
+    .test-avatar img{width:100%;height:100%;object-fit:cover}
+    .test-body p{margin:0;color:var(--muted);line-height:1.6}
+    .test-meta{margin-top:10px;color:var(--muted);font-size:.92rem}
+
+    /* ---------------- PLANS ---------------- */
+    .plans{padding:72px 0;background:linear-gradient(180deg,#ffffff,#fbfbfc)}
+    .plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto}
+    .plan-card{background:var(--card);border-radius:14px;padding:22px;border:1px solid rgba(11,18,32,0.04);box-shadow:0 12px 40px rgba(6,21,34,0.06);transition:transform .2s,box-shadow .2s;position:relative}
+    .plan-card.popular{transform:translateY(-6px);box-shadow:0 28px 80px rgba(6,21,34,0.09)}
+    .plan-badge{position:absolute;top:14px;right:14px;background:var(--accent);color:#fff;padding:6px 10px;border-radius:999px;font-weight:700;font-size:.85rem;box-shadow:0 8px 30px rgba(211,47,47,0.12)}
+    .plan-name{font-size:1.15rem;font-weight:800;margin-bottom:6px}
+    .plan-price{font-size:1.6rem;font-weight:800;color:var(--accent);margin:6px 0}
+    .plan-features{color:var(--muted);line-height:1.6;margin-top:8px}
+    .plan-features ul{padding-left:18px;margin:0}
+
+    /* ---------------- WHERE / MAP ---------------- */
+    .where-section{padding:72px 0;background:#fff}
+    .where-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;max-width:1100px;margin:0 auto}
+    .contact-card{background:var(--soft);border-radius:12px;padding:22px;border:1px solid rgba(11,18,32,0.04);box-shadow:0 12px 36px rgba(6,21,34,0.06)}
+    .contact-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+    .contact-item i{font-size:20px;color:var(--accent)}
+    .contact-item a{color:inherit;text-decoration:none;font-weight:600}
+    .map-wrap{position:relative;border-radius:12px;overflow:hidden;border:1px solid rgba(11,18,32,0.04);box-shadow:0 12px 36px rgba(6,21,34,0.06)}
+    .map-iframe{width:100%;height:320px;border:0;display:block}
+    .map-cta{position:absolute;left:18px;bottom:18px;background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 8px 24px rgba(6,21,34,0.12);font-weight:700;text-decoration:none}
+
+    /* ---------------- FOOTER ---------------- */
+    .site-footer{background:#fff;color:#071022;padding:28px 0;border-top:6px solid var(--accent)}
+    .footer-inner{max-width:var(--max-width);margin:0 auto;display:flex;gap:24px;align-items:flex-start;justify-content:space-between;padding:0 18px;flex-wrap:wrap}
+    .footer-left{flex:1 1 320px;min-width:220px}
+    .footer-right{flex:0 1 320px;min-width:220px}
+    .socials{display:flex;gap:10px;margin-top:12px}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;background:transparent;color:var(--accent);text-decoration:none;border:1px solid rgba(211,47,47,0.08)}
+    .socials a:hover{background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;transform:translateY(-3px);box-shadow:0 14px 34px rgba(211,47,47,0.12)}
+    .footer-bottom{background:transparent;color:rgba(7,16,34,0.6);padding:12px 0;text-align:center;margin-top:18px;border-top:1px solid rgba(11,18,32,0.04)}
+    .footer-bottom a{color:inherit;text-decoration:none;display:inline-block}
+
+    /* ---------------- FLOATING BUTTONS ---------------- */
+    .mobile-matric{position:fixed;left:14px;top:12px;z-index:1350;display:none}
+    .whatsapp-btn{position:fixed;right:18px;bottom:18px;z-index:1090;width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border:none;box-shadow:0 12px 40px rgba(211,47,47,0.18);cursor:pointer}
+    .to-top{position:fixed;right:18px;bottom:96px;z-index:1090;width:56px;height:56px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border:none;box-shadow:0 12px 36px rgba(211,47,47,0.18);opacity:0;transform:translateY(12px);transition:opacity .22s,transform .22s}
+    .to-top.show{opacity:1;transform:none}
+    @media (max-width:991px){ .mobile-matric{display:block} }
+
+    /* ---------------- RESPONSIVE GRID ADJUSTMENTS ---------------- */
+    @media (max-width:1100px){ .reasons-grid,.service-grid,.plan-grid{gap:18px} }
+    @media (max-width:991px){
+      .reasons-grid,.service-grid,.plan-grid{grid-template-columns:1fr}
+      .where-grid{grid-template-columns:1fr}
+      .hero-overlay-image{width:70%}
+      .map-iframe{height:280px}
+    }
+    @media (max-width:480px){
+      .hero-overlay-image{width:86%}
+      .navbar-clean{padding:.4rem}
+    }
+
+    /* ---------------- REVEAL ANIMATION ---------------- */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .72s ease,transform .72s cubic-bezier(.2,.9,.2,1)}
+    .reveal.revealed{opacity:1;transform:none}
+    @media (prefers-reduced-motion: reduce){.reveal{transition:none!important}.play-circle{transition:none!important}}
+  </style>
+</head>
+
+<body>
+  <!-- MOBILE Matric fixed left (visible only on small screens) -->
+  <div class="mobile-matric d-lg-none">
+    <a id="mobileMatricBtn" class="btn btn-matric" href="#">Matricule-se JÁ</a>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav id="mainNavbar" class="navbar-clean" role="navigation" aria-label="Main navigation">
+    <div class="navbar-container">
+      <a class="navbar-brand d-none d-md-block" href="#"><img src="assets/logo.png" alt="LOGO"></a>
+
+      <div class="d-none d-lg-flex align-items-center justify-content-center w-100">
+        <ul class="navbar-nav align-items-center gap-2" style="display:flex;list-style:none;margin:0;padding:0">
+          <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre">INSTITUCIONAL</a></li>
+          <li class="nav-item"><a class="nav-link" href="#por-que">MODALIDADES</a></li>
+          <li class="nav-item"><a class="nav-link" href="#planos">PLANOS</a></li>
+        </ul>
+      </div>
+
+      <div class="d-none d-lg-block ms-auto">
+        <a class="btn btn-matric" href="#">Matricule-se JÁ</a>
+      </div>
+
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menu">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav" style="list-style:none;padding:0;margin:0">
+          <li class="nav-item"><a class="nav-link" href="#">HOME</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sobre">INSTITUCIONAL</a></li>
+          <li class="nav-item"><a class="nav-link" href="#por-que">MODALIDADES</a></li>
+          <li class="nav-item"><a class="nav-link" href="#planos">PLANOS</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN PAGE CONTENT -->
+  <main class="site-main">
+
+    <!-- HERO -->
+    <header class="hero" role="img" aria-label="Banner visual">
+      <div id="heroBg" class="hero-bg" aria-hidden="true"></div>
+      <img src="images/hero.png" alt="Boss Fit Hero" class="hero-overlay-image">
+    </header>
+
+    <!-- SOBRE (vídeo modal) -->
+    <section id="sobre" class="about-section">
+      <div class="container-compact">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-6 reveal" data-delay="0" style="padding:0 12px 12px 0">
+            <div id="imgVideoWrap" class="clickable-wrap" tabindex="0" role="button" aria-label="Abrir vídeo Boss Fit">
+              <img src="images/img-video.png" alt="Capa do vídeo Boss Fit" class="clickable-image" id="imgVideo">
+              <div class="play-overlay" aria-hidden="true">
+                <div class="play-circle" id="playCircle"><i class="bi bi-play-fill"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 reveal" data-delay="1" style="padding:0 0 12px 12px">
+            <div class="about-content">
+              <h2>Sobre a Boss Fit</h2>
+
+              <p>Na Boss Fit, acreditamos que a saúde e o bem-estar vão além da prática de exercícios. Nossa missão é proporcionar uma experiência completa, combinando ambiente moderno, equipamentos de ponta e um atendimento de excelência para que você alcance seus objetivos com conforto e segurança.</p>
+
+              <p>Nosso espaço foi projetado para inspirar e motivar, com ambientes climatizados e uma atmosfera acolhedora.</p>
+
+              <p>Oferecemos uma ampla variedade de treinos e atividades, como musculação, aulas coletivas, e muito mais. Independentemente do seu nível de condicionamento físico, nossa equipe de profissionais está pronta para ajudar você a traçar um plano personalizado que se adapte às suas necessidades e metas. Aqui, valorizamos cada jornada. Seja para quem busca superar desafios pessoais, manter a forma, ou encontrar uma nova paixão pelo fitness, a Boss Fit é o lugar certo para transformar sua rotina e elevar seu bem-estar físico e mental. Venha fazer parte da nossa comunidade e descubra como é estar no controle da sua saúde com suporte, inovação e energia positiva.</p>
+
+              <div class="about-cta d-flex gap-2">
+                <a href="#" class="btn btn-matric">Quero me matricular</a>
+                <a href="#servicos" class="btn-ghost">Saiba mais</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POR QUE TREINAR -->
+    <section id="por-que" class="why-section" aria-labelledby="por-que-title">
+      <div class="container-compact">
+        <div class="why-header reveal" data-delay="0">
+          <h3 id="por-que-title" class="why-title">Por que a Boss Fit é o seu espaço de treino preferido</h3>
+          <div class="accent-line" aria-hidden="true" style="width:56px;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:6px;margin:12px auto 18px"></div>
+          <p class="why-sub">Mais que uma academia: um lugar pensado para acolher, desafiar e transformar. Veja por que tantas pessoas se sentem em casa aqui.</p>
+        </div>
+
+        <div class="reasons-grid">
+          <article class="reason-card reveal" data-delay="1" aria-labelledby="r1">
+            <div class="reason-badge"><i class="bi bi-building icon" aria-hidden="true"></i></div>
+            <div class="reason-body">
+              <h4 id="r1">Ambiente Moderno</h4>
+              <p>Instalações planejadas para conforto e performance, com equipamentos de última geração e espaços climatizados.</p>
+            </div>
+          </article>
+
+          <article class="reason-card reveal" data-delay="2" aria-labelledby="r2">
+            <div class="reason-badge"><i class="bi bi-person-badge icon" aria-hidden="true"></i></div>
+            <div class="reason-body">
+              <h4 id="r2">Acompanhamento Profissional</h4>
+              <p>Equipe qualificada para orientar treinos personalizados, avaliações periódicas e suporte contínuo para sua evolução.</p>
+            </div>
+          </article>
+
+          <article class="reason-card reveal" data-delay="3" aria-labelledby="r3">
+            <div class="reason-badge"><i class="bi bi-clock icon" aria-hidden="true"></i></div>
+            <div class="reason-body">
+              <h4 id="r3">Flexibilidade de Horários</h4>
+              <p>Vários horários e modalidades para encaixar o treino na sua rotina, inclusive aulas ao vivo e gravadas.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="services-section">
+      <div class="container-compact">
+        <div class="services-header reveal" data-delay="0">
+          <h3 class="why-title">Nosso Portfólio de Serviços</h3>
+          <p class="why-sub">Programas pensados para todos os perfis — escolha o que combina com você e sinta a diferença.</p>
+        </div>
+
+        <div class="service-grid">
+          <div class="service-card reveal" data-delay="1">
+            <div class="service-icon"><i class="bi bi-patch-check-fill"></i></div>
+            <h5>Treino Exclusivo de Lutas</h5>
+            <p>Sessões especializadas com foco em técnicas, performance e segurança — ideal para quem busca disciplina e intensidade.</p>
+          </div>
+
+          <div class="service-card reveal" data-delay="2">
+            <div class="service-icon"><i class="bi bi-people-fill"></i></div>
+            <h5>Aulas Coletivas</h5>
+            <p>Aulas dinâmicas e motivadoras: cardio, HIIT, ritmos e muito mais — socialize enquanto melhora seu condicionamento.</p>
+          </div>
+
+          <div class="service-card reveal" data-delay="3">
+            <div class="service-icon"><i class="bi bi-bar-chart-fill"></i></div>
+            <h5>Treinamento Funcional</h5>
+            <p>Trabalhe força, mobilidade e resistência com treinos práticos que funcionam para o seu dia a dia.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos" class="testimonials">
+      <div class="container-compact">
+        <div class="test-header reveal" data-delay="0">
+          <h3 class="test-title">Depoimentos</h3>
+          <p class="test-sub">O que nossos alunos dizem — histórias reais de transformação e bem-estar.</p>
+        </div>
+
+        <div id="testCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="testimonial-card d-flex align-items-start">
+                <div class="test-avatar"><img src="images/image.png" alt="João C"></div>
+                <div class="test-body">
+                  <p>"Entrei na Boss Fit sem muita expectativa e encontrei uma comunidade que me acolheu. Os treinos são desafiadores, o acompanhamento é próximo e senti melhorias já nas primeiras semanas."</p>
+                  <div class="test-meta">João C. — Aluno há 8 meses</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="testimonial-card d-flex align-items-start">
+                <div class="test-avatar"><img src="images/image.png" alt="Mariana B"></div>
+                <div class="test-body">
+                  <p>"O espaço é incrível — moderno e limpo. As aulas coletivas me ajudaram a manter a disciplina e fiz ótimos amigos. Recomendo para quem quer treinar com qualidade e diversão."</p>
+                  <div class="test-meta">Mariana B. — Aluna há 1 ano</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="testimonial-card d-flex align-items-start">
+                <div class="test-avatar"><img src="images/image.png" alt="Rafael L"></div>
+                <div class="test-body">
+                  <p>"Treinamento funcional que realmente funciona — senti mais força e mobilidade em poucas semanas. Profissionais muito qualificados."</p>
+                  <div class="test-meta">Rafael L. — Aluno há 4 meses</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#testCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#testCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS -->
+    <section id="planos" class="plans">
+      <div class="container-compact">
+        <div class="plans-header reveal" data-delay="0">
+          <h3 class="test-title">Nossos Planos</h3>
+          <p class="test-sub">Planos pensados para diferentes objetivos — escolha o que combina com sua rotina.</p>
+        </div>
+
+        <div class="plan-grid reveal" data-delay="1">
+
+          <div class="plan-card popular" aria-label="Plano Boss - Popular">
+            <div class="plan-badge">POPULAR</div>
+            <div class="plan-name">PLANO BOSS</div>
+            <div class="plan-price">R$ 149,99 <span style="font-size:.7rem;color:var(--muted);font-weight:600">/mês</span></div>
+            <div class="plan-features">
+              <ul>
+                <li>Adesão Zero</li>
+                <li>Musculação e Aeróbicos</li>
+                <li>Aulas de Ginásticas Coletivas</li>
+                <li>Leve 5 Amigos por Mês para Treinar Com Você (Válido 1 treino por mês para cada amigo)</li>
+                <li>Cadeira de Massagem (Em Breve)</li>
+                <li>Fidelidade de 12 Meses</li>
+              </ul>
+            </div>
+            <div class="plan-cta"><a class="btn btn-matric" href="#">Assinar</a></div>
+          </div>
+
+          <div class="plan-card" aria-label="Plano Fit">
+            <div class="plan-name">PLANO FIT</div>
+            <div class="plan-price">R$ 139,90 <span style="font-size:.7rem;color:var(--muted);font-weight:600">/mês</span></div>
+            <div class="plan-features">
+              <ul>
+                <li>Adesão Zero</li>
+                <li>Musculação e Aeróbicos</li>
+                <li>Aulas de Ginásticas Coletivas</li>
+                <li>Sem Fidelidade</li>
+              </ul>
+            </div>
+            <div class="plan-cta"><a class="btn btn-matric" href="#">Assinar</a></div>
+          </div>
+
+          <div class="plan-card" aria-label="Plano Red">
+            <div class="plan-name">PLANO RED</div>
+            <div class="plan-price">R$ 129,90 <span style="font-size:.7rem;color:var(--muted);font-weight:600">/mês</span></div>
+            <div class="plan-features">
+              <ul>
+                <li>Adesão Zero</li>
+                <li>Musculação e Aeróbicos</li>
+                <li>Aulas de Ginásticas Coletivas</li>
+                <li>Fidelidade de 12 Meses</li>
+              </ul>
+            </div>
+            <div class="plan-cta"><a class="btn btn-matric" href="#">Assinar</a></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WHERE WE ARE -->
+    <section id="onde-encontrar" class="where-section">
+      <div class="container-compact">
+        <div class="where-header reveal" data-delay="0">
+          <h3 class="why-title">Onde nos encontrar</h3>
+          <p class="why-sub">Venha nos visitar — estamos prontos para receber você com toda a estrutura e cordialidade.</p>
+        </div>
+
+        <div class="where-grid">
+          <div class="contact-card reveal" data-delay="1">
+            <div class="contact-item">
+              <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+              <div>
+                <strong>Endereço</strong>
+                <div>Rua Professor Villas Bouçadas, 785, Santos Dumont, Juiz de Fora, MG</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+              <div>
+                <strong>Telefone</strong>
+                <div><a href="tel:+5532988192438">(32) 988192438</a></div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+              <div>
+                <strong>E-mail</strong>
+                <div><a href="mailto:contato@academiabossfit.com.br">contato@academiabossfit.com.br</a></div>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <a class="btn btn-matric me-2" href="https://wa.me/5532988192438" target="_blank" rel="noopener">Fale conosco</a>
+              <a class="btn btn-ghost" style="border:1.5px solid rgba(11,18,32,0.06)" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Professor+Villas+Bouçadas+785+Santos+Dumont+Juiz+de+Fora+MG" target="_blank" rel="noopener">Agende uma visita</a>
+            </div>
+          </div>
+
+          <div class="map-wrap reveal" data-delay="2">
+            <iframe class="map-iframe" src="https://www.google.com/maps?q=Rua+Professor+Villas+Bouçadas+785+Santos+Dumont+Juiz+de+Fora+MG&output=embed" aria-hidden="false" title="Mapa — Boss Fit"></iframe>
+            <a class="map-cta" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Professor+Villas+Bouçadas+785+Santos+Dumont+Juiz+de+Fora+MG" target="_blank" rel="noopener">Abrir rota</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <h4>BOSS FIT</h4>
+        <p style="color:#6b7280;margin-top:6px;max-width:360px">Sua academia em Juiz de Fora — espaço acolhedor, profissionais certificados e treinos para todos os níveis.</p>
+        <div class="socials" aria-label="Redes sociais">
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+          <a href="https://wa.me/5532998442072" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="contact-item"><strong>Endereço:</strong><div>Rua Professor Villas Bouçadas, 785, Santos Dumont, Juiz de Fora, MG</div></div>
+        <div class="contact-item mt-2"><strong>Telefone:</strong> <a href="tel:+5532988192438">(32) 9 8819-2438</a></div>
+        <div class="contact-item mt-2"><strong>E-mail:</strong> <a href="mailto:contato@academiabossfit.com.br">contato@academiabossfit.com.br</a></div>
+      </div>
+    </div>
+
+    <div class="footer-bottom container-compact">
+      <a href="https://wa.me/5532988221108" target="_blank" rel="noopener">Copyright BOSS FIT 2025 Todos os Direitos Reservados | Desenvolvido por ThynkXP</a>
+    </div>
+  </footer>
+
+  <!-- Floating Buttons -->
+  <a id="whatsappBtn" class="whatsapp-btn" href="https://wa.me/5532988192438" target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+    <i class="bi bi-whatsapp" style="font-size:20px;color:#fff"></i>
+  </a>
+
+  <button id="toTopBtn" class="to-top" aria-label="Voltar ao topo"><i class="bi bi-arrow-up" style="font-size:20px;color:#fff"></i></button>
+
+  <!-- Video Modal -->
+  <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-transparent border-0">
+        <div class="modal-body p-0">
+          <div class="ratio ratio-16x9">
+            <iframe id="modalIframe" src="" title="Vídeo Boss Fit" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+          </div>
+        </div>
+        <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Fechar" style="filter:drop-shadow(0 6px 18px rgba(0,0,0,0.3));"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function(){
+      // Video modal
+      const videoId = 'r25uWk-ywl4';
+      const modalEl = document.getElementById('videoModal');
+      const modal = modalEl ? new bootstrap.Modal(modalEl) : null;
+      const iframe = document.getElementById('modalIframe');
+      const imgVideoWrap = document.getElementById('imgVideoWrap');
+      const imgVideo = document.getElementById('imgVideo');
+      const playCircle = document.getElementById('playCircle');
+
+      function openModal(){
+        if(!modal || !iframe) return;
+        iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&modestbranding=1`;
+        modal.show();
+      }
+      function stopVideo(){ if(iframe) iframe.src = ''; }
+
+      [imgVideoWrap, imgVideo, playCircle].forEach(el=>{
+        if(!el) return;
+        el.addEventListener('click', openModal);
+        el.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(); } });
+      });
+      if(modalEl) modalEl.addEventListener('hidden.bs.modal', stopVideo);
+
+      // Navbar scroll + hero parallax + to-top show
+      const nav = document.getElementById('mainNavbar');
+      const heroBg = document.getElementById('heroBg');
+      const navMenu = document.getElementById('navMenu');
+      const mobileMatric = document.getElementById('mobileMatricBtn');
+      const toTopBtn = document.getElementById('toTopBtn');
+
+      function onScroll(){
+        if(window.scrollY > 56) nav.classList.add('navbar-scrolled'); else nav.classList.remove('navbar-scrolled');
+        const sc = Math.min(window.scrollY,600);
+        if(heroBg) heroBg.style.transform = `translateY(${sc * -0.04}px) scale(${1.02 - sc/10000})`;
+        if(window.scrollY > 360) toTopBtn.classList.add('show'); else toTopBtn.classList.remove('show');
+      }
+      document.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+      // hide mobile matric when nav opens
+      if(navMenu && mobileMatric){
+        navMenu.addEventListener('show.bs.collapse', ()=> mobileMatric.style.display = 'none');
+        navMenu.addEventListener('hide.bs.collapse', ()=> mobileMatric.style.display = '');
+      }
+
+      // reveal animations using IntersectionObserver
+      const reveals = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const el = entry.target;
+            const d = el.getAttribute('data-delay') || 0;
+            setTimeout(()=> el.classList.add('revealed'), d * 110);
+            io.unobserve(entry.target);
+          }
+        });
+      },{threshold:0.12});
+      reveals.forEach(r=>io.observe(r));
+
+      // to-top button behavior
+      if(toTopBtn) toTopBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+      // smooth anchors
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e)=>{
+          const href = a.getAttribute('href');
+          if(href.length>1){ e.preventDefault(); const target = document.querySelector(href); if(target) target.scrollIntoView({behavior:'smooth',block:'start'}); }
+        });
+      });
+
+      // reduced motion fallback
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        document.querySelectorAll('.reveal').forEach(n=>n.classList.add('revealed'));
+      }
+
+      // collapse menu after clicking (mobile) and active link
+      document.querySelectorAll('.nav-link').forEach(link=>{
+        link.addEventListener('click', (e)=>{
+          document.querySelectorAll('.nav-link').forEach(n=>n.classList.remove('active'));
+          e.currentTarget.classList.add('active');
+          if(window.getComputedStyle(document.querySelector('.navbar-toggler')).display !== 'none'){
+            bootstrap.Collapse.getInstance(document.getElementById('navMenu'))?.hide();
+          }
+        });
+      });
+
+    })();
+  </script>
+
+
+</body></html>
